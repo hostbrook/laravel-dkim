@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * HostBrook note:
+ * The source code of Srvice Provider is taken from here:
+ * https://github.com/DUDU54/laravel-dkim
+ */
+
 namespace HostBrook\LaravelDkim;
 
 use Illuminate\Mail\MailServiceProvider;
@@ -11,38 +17,25 @@ class DkimMailServiceProvider extends MailServiceProvider
      *
      * @return void
      */
-    public function registerIlluminateMailer()
+    public function register()
     {
-        $this->app->singleton('mailer', function ($app) {
-            // Once we have create the mailer instance, we will set a container instance
-            // on the mailer. This allows us to resolve mailer classes via containers
-            // for maximum testability on said classes instead of passing Closures.
-            $mailer = new Mailer(
-                $app['view'], $app['swift.mailer'], $app['events']
-            );
+        $this->registerIlluminateMailer();
+        parent::registerMarkdownRenderer();
+    }
 
-            $mailer->setQueue(app('queue'));
-            
-            if (method_exists($this, 'setMailerDependencies')) {
-                $this->setMailerDependencies($mailer, $app);
-            }
+    /**
+     * Register the Illuminate mailer instance.
+     *
+     * @return void
+     */
+    protected function registerIlluminateMailer()
+    {
+        $this->app->singleton('mail.manager', function ($app) {
+            return new MailManager($app);
+        });
 
-            // If a "from" address is set, we will set it on the mailer so that all mail
-            // messages sent by the applications will utilize the same "from" address
-            // on each one, which makes the developer's life a lot more convenient.
-            $from = $app['config']['mail.from'];
-
-            if (is_array($from) && isset($from['address'])) {
-                $mailer->alwaysFrom($from['address'], $from['name']);
-            }
-
-            $to = $app['config']['mail.to'];
-
-            if (is_array($to) && isset($to['address'])) {
-                $mailer->alwaysTo($to['address'], $to['name']);
-            }
-
-            return $mailer;
+        $this->app->bind('mailer', function ($app) {
+            return $app->make('mail.manager')->mailer();
         });
     }
 }
