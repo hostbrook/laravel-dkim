@@ -1,23 +1,23 @@
 {
-    "name": "vitalybaev/laravel-dkim",
-    "description": "Laravel 5/6 package for signing outgoing messages with DKIM.",
-    "license": "MIT",
+    "name": "hostbrook/laravel-dkim",
+    "description": "Laravel 8 package to sign emails with DKIM",
+    "type": "package",
+    "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Vitaly Baev",
-            "email": "hello@vitalybaev.ru"
-        },
-        {
-            "name": "Ricardo Boss",
-            "email": "contact@ricardoboss.de"
+            "name": "HostBrook",
+            "email": "support@hostbrook.com",
+            "homepage": "https://hostbrook.com"
         }
     ],
     "require": {
-        "laravel/framework": "^5.2|^6.0"
+        "laravel/framework": "^7.3|^8.0",
+        "php": ">=7.4.0"
     },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Vitalybaev\\LaravelDkim\\": "src/"
+            "HostBrook\\LaravelDkim\\": "src/"
         }
     }
 }
