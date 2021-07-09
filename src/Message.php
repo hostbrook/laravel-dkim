@@ -5,7 +5,7 @@
  * The generic idea of the Message class code is taken from here:
  * https://github.com/vitalybaev/laravel-dkim
  * 
- * The original code has been changed to match Laravel versions ^7.4|^8.0 and easier configuration
+ * The original code has been changed to match Laravel versions ^7.0|^8.0 and easier configuration
  */
 
 namespace HostBrook\LaravelDkim;
