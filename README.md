@@ -1,5 +1,5 @@
 # Laravel DKIM signature
-Sign all outgoing emails in Laravel ^7.0, ^8.0 with a DKIM signature.
+Sign all outgoing emails in Laravel 7.x, 8.x with a DKIM signature.
 
 ## Installation and setup
 
@@ -23,11 +23,11 @@ HostBrook\LaravelDkim\DkimMailServiceProvider::class,
 -----END RSA PRIVATE KEY-----',
 ```
 
-> IMPORTANT! Note, everything between two instances `'-----BEGIN RSA PRIVATE KEY-----'` and `'-----END RSA PRIVATE KEY-----'` must be right up to the start of the line!
+> **IMPORTANT!** Note, everything between two instances `'-----BEGIN RSA PRIVATE KEY-----'` and `'-----END RSA PRIVATE KEY-----'` must be right up to the start of the line!
 
 ## Upgrading
 
-Whenever there is a new release, then from the command line in your **project root**:
+Whenever there is a new release, then from the command line in your ***project root***:
 
 ```shell
 composer update
