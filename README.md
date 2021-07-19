@@ -14,7 +14,7 @@ composer require hostbrook/laravel-dkim
 HostBrook\LaravelDkim\DkimMailServiceProvider::class,
 ```
 
-4. Add your private key settings in `config/mail.php`:
+3. Add your private key settings in `config/mail.php`:
 ```
 'dkim_selector' => YOUR_SELECTOR, // for example: 'Selector123'
 'dkim_domain' => DOMAIN_NAME,     // for example: 'myblog.com'
