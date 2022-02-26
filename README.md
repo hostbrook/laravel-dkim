@@ -1,5 +1,5 @@
 # Laravel DKIM signature
-Sign all outgoing emails in Laravel 7.x, 8.x with a DKIM signature.
+Sign all outgoing emails in Laravel 7.x, 8.x, 9.x with a DKIM signature.
 
 ## Installation and setup
 
