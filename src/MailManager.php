@@ -2,8 +2,9 @@
 
 /**
  * HostBrook note:
- * The source code of mail manager is taken from here:
+ * The source code of Mail Manager is partipally based on the next sources:
  * https://github.com/DUDU54/laravel-dkim
+ * https://github.com/simonschaufi/laravel-dkim
  */
 
 namespace HostBrook\LaravelDkim;
@@ -13,16 +14,14 @@ class MailManager extends \Illuminate\Mail\MailManager
     /**
      * Resolve the given mailer.
      *
-     * @param  string  $name
-     * @return \Illuminate\Mail\Mailer
-     *
-     * @throws \InvalidArgumentException
+     * @param string $name
+     * @return Mailer
      */
-    protected function resolve($name)
+    protected function resolve($name): Mailer
     {
-        $config = parent::getConfig($name);
+        $config = $this->getConfig($name);
 
-        if (is_null($config)) {
+        if ($config === null) {
             throw new \InvalidArgumentException("Mailer [{$name}] is not defined.");
         }
 
@@ -32,7 +31,7 @@ class MailManager extends \Illuminate\Mail\MailManager
         $mailer = new Mailer(
             $name,
             $this->app['view'],
-            $this->createSwiftMailer($config),
+            $this->createSymfonyTransport($config),
             $this->app['events']
         );
 
@@ -49,5 +48,4 @@ class MailManager extends \Illuminate\Mail\MailManager
 
         return $mailer;
     }
-
 }

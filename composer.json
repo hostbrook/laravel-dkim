@@ -1,6 +1,6 @@
 {
     "name": "hostbrook/laravel-dkim",
-    "description": "Laravel 8 package to sign emails with DKIM",
+    "description": "Laravel 9 package to sign emails with DKIM",
     "type": "package",
     "license": "Apache-2.0",
     "authors": [
@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "laravel/framework": "^7.0|^8.0"
+        "laravel/framework": "^9.0"
     },
     "minimum-stability": "stable",
     "autoload": {
