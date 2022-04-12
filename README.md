@@ -8,6 +8,8 @@
 
 Sign all outgoing emails in Laravel 9.x with a DKIM signature.
 
+> **IMPORTANT!** Be aware! Laravel 9.x uses Symfony Mailer as a mail service provider. There is a known bug in Symfony Mailer DkimSigner: if mail is built with multi parts (HTML and PLAIN TEXT) the result DKIM signature is invalid. So, if you need to sign with DKIM in Laravel 9.x, either you have to avoid building multi-part emails or continue using disappeared Swift Mailer. [More about the Symfony bug](https://github.com/symfony/symfony/issues/39354)
+
 ## Installation and setup
 
 1. Get the latest version of the package via Composer:
