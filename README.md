@@ -2,11 +2,11 @@
 <a href="https://github.com/hostbrook/laravel-dkim"><img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/hostbrook/laravel-dkim"></a>
 <a href="https://github.com/hostbrook/laravel-dkim"><img alt="License" src="https://img.shields.io/github/license/hostbrook/laravel-dkim"></a>
 
-</p>
+<p></p>
 
-# Laravel 9.x DKIM signature
+# Laravel 10.x DKIM signature
 
-Sign all outgoing emails in Laravel 9.x with a DKIM signature.
+Sign all outgoing emails in Laravel 10.x with a DKIM signature.
 
 ## Installation and setup
 
