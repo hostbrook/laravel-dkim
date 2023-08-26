@@ -1,6 +1,6 @@
 {
     "name": "hostbrook/laravel-dkim",
-    "description": "Laravel 9 package to sign emails with DKIM",
+    "description": "Laravel 9.x and 10.x package to sign emails with DKIM",
     "type": "package",
     "license": "MIT",
     "authors": [
