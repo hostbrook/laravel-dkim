@@ -11,8 +11,8 @@
         }
     ],
     "require": {
-        "laravel/framework": "^9.0|^10.0",
-        "symfony/mailer": "^5.2|^6.0"
+        "laravel/framework": "^9.0 || ^10.0",
+        "symfony/mailer": "^5.2 || ^6.0"
     },
     "minimum-stability": "stable",
     "autoload": {

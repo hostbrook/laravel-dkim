@@ -13,6 +13,7 @@ namespace HostBrook\LaravelDkim;
 use Illuminate\Contracts\Mail\Mailable as MailableContract;
 use Illuminate\Mail\SentMessage;
 use Symfony\Component\Mime\Crypto\DkimSigner;
+use Illuminate\Support\Facades\File;
 
 class Mailer extends \Illuminate\Mail\Mailer
 {
@@ -58,15 +59,19 @@ class Mailer extends \Illuminate\Mail\Mailer
         // its recipients. We will then fire the sent event for the sent message.
         $symfonyMessage = $message->getSymfonyMessage();
 
-        $signer = new DkimSigner(
-            config('mail.dkim_private_key'), 
-            config('mail.dkim_domain'), 
-            config('mail.dkim_selector'), 
-            [],
-            config('mail.dkim_passphrase')
-        );
-        $signedEmail = $signer->sign($message->getSymfonyMessage());
-        $symfonyMessage->setHeaders($signedEmail->getHeaders());
+        $privateKey = env('DKIM_PRIVATE_KEY') ? env('DKIM_PRIVATE_KEY','') : config('mail.dkim_private_key','');
+        if (File::exists(base_path().$privateKey)) $privateKey = File::get(base_path().$privateKey);
+
+        $domain = env('DKIM_DOMAIN') ? env('DKIM_DOMAIN','') : config('mail.dkim_domain','');
+        $selector = env('DKIM_SELECTOR') ? env('DKIM_SELECTOR','') : config('mail.dkim_selector','');
+        $passphrase = env('DKIM_PASSPHRASE') ? env('DKIM_PASSPHRASE','') : config('mail.dkim_passphrase','');
+
+        // Sign emails if values of domain, selector and passphrase exist:
+        if ($privateKey && $domain && $selector) {
+            $signer = new DkimSigner($privateKey, $domain, $selector, [], $passphrase);
+            $signedEmail = $signer->sign($message->getSymfonyMessage());
+            $symfonyMessage->setHeaders($signedEmail->getHeaders());
+        }
 
         if ($this->shouldSendMessage($symfonyMessage, $data)) {
             $symfonySentMessage = $this->sendSymfonyMessage($symfonyMessage);
