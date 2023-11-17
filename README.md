@@ -27,43 +27,43 @@ HostBrook\LaravelDkim\DkimMailServiceProvider::class,
 
 3. Add your DKIM private key settings in `/.env` or in `/config/mail.php`. The priority of DKIM settings is from `/.env` file.
 
-3.1. The syntax, if you want to add DKIM private key settings in `/.env` file:
+   3.1. The syntax, if you want to add DKIM private key settings in `/.env` file:
 
-```
-DKIM_SELECTOR="selector1"
-DKIM_DOMAIN="domain.name"
-DKIM_PASSPHRASE=""
-DKIM_PRIVATE_KEY="/storage/app/dkim/private_key.txt"
-```
+   ```
+   DKIM_SELECTOR="selector1"
+   DKIM_DOMAIN="domain.name"
+   DKIM_PASSPHRASE=""
+   DKIM_PRIVATE_KEY="/storage/app/dkim/private_key.txt"
+   ```
 
-As an option, you can add full RSA Private Key to the `.env` file, for example:
+   As an option, you can add full RSA Private Key to the `.env` file, for example:
 
-```
-DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEAq1SCAScet736Rr/f36OYUo8cRziq4v2uq6kNs5wzEaaqUAoh
-...
-ENwDlqtgpM9D7YznrL6W9NH7fdSwmz2Ux0frY6weuBx/VSeJn1fb
------END RSA PRIVATE KEY-----"
-```
+   ```
+   DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
+   MIIEowIBAAKCAQEAq1SCAScet736Rr/f36OYUo8cRziq4v2uq6kNs5wzEaaqUAoh
+   ...
+   ENwDlqtgpM9D7YznrL6W9NH7fdSwmz2Ux0frY6weuBx/VSeJn1fb
+   -----END RSA PRIVATE KEY-----"
+   ```
 
-3.2. The syntax, if you want to add DKIM private key settings in `/config/mail.php` file:
+   3.2. The syntax, if you want to add DKIM private key settings in `/config/mail.php` file:
 
-```
-'dkim_selector' => 'selector1',
-'dkim_domain' => 'domain.name',
-'dkim_passphrase' => '', // leave empty if you didn’t protect the private key
-'dkim_private_key' => '/storage/app/dkim/private_key.txt',
-```
+   ```
+   'dkim_selector' => 'selector1',
+   'dkim_domain' => 'domain.name',
+   'dkim_passphrase' => '', // leave empty if you didn’t protect the private key
+   'dkim_private_key' => '/storage/app/dkim/private_key.txt',
+   ```
 
-As an option, you can add full RSA Private Key to the `/config/mail.php` file, for example:
+   As an option, you can add full RSA Private Key to the `/config/mail.php` file, for example:
 
-```
-'dkim_private_key' => '-----BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEAq1SCAScet736Rr/f36OYUo8cRziq4v2uq6kNs5wzEaaqUAoh
-...
-ENwDlqtgpM9D7YznrL6W9NH7fdSwmz2Ux0frY6weuBx/VSeJn1fb
------END RSA PRIVATE KEY-----',
-```
+   ```
+   'dkim_private_key' => '-----BEGIN RSA PRIVATE KEY-----
+   MIIEowIBAAKCAQEAq1SCAScet736Rr/f36OYUo8cRziq4v2uq6kNs5wzEaaqUAoh
+   ...
+   ENwDlqtgpM9D7YznrL6W9NH7fdSwmz2Ux0frY6weuBx/VSeJn1fb
+   -----END RSA PRIVATE KEY-----',
+   ```
 
 ## Notes and recommendations
 
