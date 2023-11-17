@@ -14,6 +14,7 @@ use Illuminate\Contracts\Mail\Mailable as MailableContract;
 use Illuminate\Mail\SentMessage;
 use Symfony\Component\Mime\Crypto\DkimSigner;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class Mailer extends \Illuminate\Mail\Mailer
 {
@@ -67,7 +68,16 @@ class Mailer extends \Illuminate\Mail\Mailer
         $passphrase = env('DKIM_PASSPHRASE') ? env('DKIM_PASSPHRASE','') : config('mail.dkim_passphrase','');
 
         // Sign emails if values of domain, selector and passphrase exist:
-        if ($privateKey && $domain && $selector) {
+        if (!$privateKey) {
+            Log::warning('The message hasn\'t been signed with DKIM: No private key set.');
+        }
+        elseif (!$domain) {
+            Log::warning('The message hasn\'t been signed with DKIM: No domain set.');
+        }
+        elseif (!$selector) {
+            Log::warning('The message hasn\'t been signed with DKIM: No selector set.');
+        }
+        else {
             $signer = new DkimSigner($privateKey, $domain, $selector, [], $passphrase);
             $signedEmail = $signer->sign($message->getSymfonyMessage());
             $symfonyMessage->setHeaders($signedEmail->getHeaders());

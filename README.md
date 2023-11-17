@@ -25,9 +25,9 @@ composer require hostbrook/laravel-dkim
 HostBrook\LaravelDkim\DkimMailServiceProvider::class,
 ```
 
-3. Add your DKIM private key settings in `/.env` or/and in `/config/mail.php`.
+3. Add your DKIM private key settings in `/.env` or in `/config/mail.php`. The priority of DKIM settings is from `/.env` file.
 
-3.1. The syntax if you want to add DKIM private key settings in `/.env` file:
+3.1. The syntax, if you want to add DKIM private key settings in `/.env` file:
 
 ```
 DKIM_SELECTOR="selector1"
@@ -50,7 +50,7 @@ ENwDlqtgpM9D7YznrL6W9NH7fdSwmz2Ux0frY6weuBx/VSeJn1fb
 
 > **IMPORTANT!** Note, everything between two instances `'-----BEGIN RSA PRIVATE KEY-----'` and `'-----END RSA PRIVATE KEY-----'` must be right up to the start of the line!
 
-3.2. The syntax if you want to add DKIM private key settings in `/config/mail.php` file:
+3.2. The syntax, if you want to add DKIM private key settings in `/config/mail.php` file:
 
 ```
 'dkim_selector' => 'selector1',
