@@ -36,7 +36,7 @@ HostBrook\LaravelDkim\DkimMailServiceProvider::class,
    DKIM_PRIVATE_KEY="/storage/app/dkim/private_key.txt"
    ```
 
-   As an option, you can add full RSA Private Key to the `.env` file, for example:
+   As an option, you can add the full RSA Private Key to the `.env` file, for example:
 
    ```
    DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
@@ -55,7 +55,7 @@ HostBrook\LaravelDkim\DkimMailServiceProvider::class,
    'dkim_private_key' => '/storage/app/dkim/private_key.txt',
    ```
 
-   As an option, you can add full RSA Private Key to the `/config/mail.php` file, for example:
+   As an option, you can add the full RSA Private Key to the `/config/mail.php` file, for example:
 
    ```
    'dkim_private_key' => '-----BEGIN RSA PRIVATE KEY-----
@@ -67,8 +67,7 @@ HostBrook\LaravelDkim\DkimMailServiceProvider::class,
 
 ## Notes and recommendations
 
-- Тo matter where you keep RSA Private Key, in `/.env` file or in `/config/mail.php` file or in a text file, everything between two instances `'-----BEGIN RSA PRIVATE KEY-----'` and `'-----END RSA PRIVATE KEY-----'` must be right up to the start of the line!
-- If at least one of the parameters (selector, domain, or private key) is not set, the email will be sent (with a warning in the log file), but without the DKIM signature.
+- No matter where you keep the RSA Private Key, in `/.env` file or in `/config/mail.php` file or in a text file, everything between two instances `'-----BEGIN RSA PRIVATE KEY-----'` and `'-----END RSA PRIVATE KEY-----'` must be right up to the start of the line!
 - It is not recommended to keep private key directly in the `/config/mail.php` file for security reasons especially if your project is not in the private repository.
 - If you would like to keep RSA Private key in a text file, the path to the text file must be relative to the project base path (like in the example above).
 
@@ -78,6 +77,14 @@ Whenever there is a new release, then from the command line in your **_project r
 
 ```shell
 composer update
+```
+
+## Deleting package
+
+Running the following command will remove the package from vendor folder:
+
+```shell
+omposer remove hostbrook/laravel-dkim
 ```
 
 ## DKIM info
