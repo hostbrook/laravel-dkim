@@ -84,7 +84,7 @@ composer update
 Running the following command will remove the package from vendor folder:
 
 ```shell
-omposer remove hostbrook/laravel-dkim
+composer remove hostbrook/laravel-dkim
 ```
 
 ## DKIM info
