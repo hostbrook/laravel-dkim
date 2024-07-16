@@ -27,9 +27,9 @@ composer require hostbrook/laravel-dkim
 HostBrook\LaravelDkim\DkimMailServiceProvider::class,
 ```
 
-3. Add your DKIM private key settings in `/.env` or in `/config/mail.php`. The priority of DKIM settings is from `/.env` file.
+1. Add your DKIM private key settings in `/.env` and in `/config/mail.php`. 
 
-   3.1. The syntax, if you want to add DKIM private key settings in `/.env` file:
+   3.1. Add DKIM private key settings in `/.env` file:
 
    ```
    DKIM_SELECTOR="selector1"
@@ -38,7 +38,7 @@ HostBrook\LaravelDkim\DkimMailServiceProvider::class,
    DKIM_PRIVATE_KEY="/storage/app/dkim/private_key.txt"
    ```
 
-   As an option, you can add the full RSA Private Key to the `.env` file, for example:
+   Or, add the full RSA Private Key to the `.env` file, for example:
 
    ```
    DKIM_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
@@ -48,28 +48,18 @@ HostBrook\LaravelDkim\DkimMailServiceProvider::class,
    -----END RSA PRIVATE KEY-----"
    ```
 
-   3.2. The syntax, if you want to add DKIM private key settings in `/config/mail.php` file:
+   3.2. Then in `/config/mail.php` file:
 
    ```
-   'dkim_selector' => 'selector1',
-   'dkim_domain' => 'domain.name',
-   'dkim_passphrase' => '', // leave empty if you didn’t protect the private key
-   'dkim_private_key' => '/storage/app/dkim/private_key.txt',
-   ```
-
-   As an option, you can add the full RSA Private Key to the `/config/mail.php` file, for example:
-
-   ```
-   'dkim_private_key' => '-----BEGIN RSA PRIVATE KEY-----
-   MIIEowIBAAKCAQEAq1SCAScet736Rr/f36OYUo8cRziq4v2uq6kNs5wzEaaqUAoh
-   ...
-   ENwDlqtgpM9D7YznrL6W9NH7fdSwmz2Ux0frY6weuBx/VSeJn1fb
-   -----END RSA PRIVATE KEY-----',
+    'dkim_private_key' => env('DKIM_PRIVATE_KEY', ''),
+    'dkim_domain' => env('DKIM_DOMAIN', ''),
+    'dkim_selector' => env('DKIM_SELECTOR', 'default'),
+    'dkim_passphrase' => env('DKIM_PASSPHRASE', ''),
    ```
 
 ## Notes and recommendations
 
-- No matter where you keep the RSA Private Key, in `/.env` file or in `/config/mail.php` file or in a text file, everything between two instances `'-----BEGIN RSA PRIVATE KEY-----'` and `'-----END RSA PRIVATE KEY-----'` must be right up to the start of the line!
+- No matter where you keep the RSA Private Key, everything between two instances `'-----BEGIN RSA PRIVATE KEY-----'` and `'-----END RSA PRIVATE KEY-----'` must be right up to the start of the line!
 - It is not recommended to keep private key directly in the `/config/mail.php` file for security reasons especially if your project is not in the private repository.
 - If you would like to keep RSA Private key in a text file, the path to the text file must be relative to the project base path (like in the example above).
 
