@@ -1,6 +1,6 @@
 {
     "name": "hostbrook/laravel-dkim",
-    "description": "Laravel 9.x, 10.x and 11.x package to sign emails with DKIM",
+    "description": "Laravel 9.x, 10.x, 11.x and 12.x package to sign emails with DKIM",
     "type": "package",
     "license": "MIT",
     "authors": [
@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "laravel/framework": "^9.0 || ^10.0 || ^11.0",
+        "laravel/framework": "^9.0 || ^10.0 || ^11.0 || ^12.0",
         "symfony/mailer": "^5.2 || ^6.0 || ^7.0"
     },
     "minimum-stability": "stable",

@@ -4,13 +4,15 @@
 
 <p></p>
 
-# Laravel 9.x, 10.x and 11.x DKIM signature
+# Laravel 9.x, 10.x, 11.x and 12.x DKIM signature
 
-Sign all outgoing emails in Laravel 9.x, 10.x and 11.x with a DKIM signature.
+Sign all outgoing emails in Laravel 9.x, 10.x, 11.x and 12.x with a DKIM signature.
 
 > **IMPORTANT!** The package version that supports Laravel 10.x starts from 1.2.5
 
 > **IMPORTANT!** The package version that supports Laravel 11.x starts from 1.4
+
+> **IMPORTANT!** The package version that supports Laravel 12.x starts from 1.5
 
 ## Installation and setup
 
