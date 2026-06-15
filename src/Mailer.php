@@ -42,7 +42,7 @@ class Mailer extends \Illuminate\Mail\Mailer
         // Once we have retrieved the view content for the e-mail we will set the body
         // of this message using the HTML type, which will provide a simple wrapper
         // to creating view based emails that are able to receive arrays of data.
-        if (! is_null($callback)) {
+        if (!is_null($callback)) {
             $callback($message);
         }
 
@@ -59,25 +59,28 @@ class Mailer extends \Illuminate\Mail\Mailer
         // one final chance to stop this message and then we will send it to all of
         // its recipients. We will then fire the sent event for the sent message.
         $symfonyMessage = $message->getSymfonyMessage();
+        $privateKey = config('mail.dkim_private_key', '');
+        if ($privateKey != null)
+            try {
+                if (File::exists(base_path() . $privateKey))
+                    $privateKey = File::get(base_path() . $privateKey);
+            } catch (\Exception $ex) {
+                Log::error($ex->getMessage());
+                return null;
+            }
 
-        $privateKey = env('DKIM_PRIVATE_KEY') ? env('DKIM_PRIVATE_KEY','') : config('mail.dkim_private_key','');
-        if (File::exists(base_path().$privateKey)) $privateKey = File::get(base_path().$privateKey);
-
-        $domain = env('DKIM_DOMAIN') ? env('DKIM_DOMAIN','') : config('mail.dkim_domain','');
-        $selector = env('DKIM_SELECTOR') ? env('DKIM_SELECTOR','') : config('mail.dkim_selector','');
-        $passphrase = env('DKIM_PASSPHRASE') ? env('DKIM_PASSPHRASE','') : config('mail.dkim_passphrase','');
+        $domain = config('mail.dkim_domain', '');
+        $selector = config('mail.dkim_selector', '');
+        $passphrase = config('mail.dkim_passphrase', '');
 
         // Sign emails if values of domain, selector and passphrase exist:
         if (!$privateKey) {
             Log::warning('The message hasn\'t been signed with DKIM: No private key set.');
-        }
-        elseif (!$domain) {
+        } elseif (!$domain) {
             Log::warning('The message hasn\'t been signed with DKIM: No domain set.');
-        }
-        elseif (!$selector) {
+        } elseif (!$selector) {
             Log::warning('The message hasn\'t been signed with DKIM: No selector set.');
-        }
-        else {
+        } else {
             $signer = new DkimSigner($privateKey, $domain, $selector, [], $passphrase);
             $signedEmail = $signer->sign($message->getSymfonyMessage());
             $symfonyMessage->setHeaders($signedEmail->getHeaders());
